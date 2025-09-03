@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<style>
+	
+	/* General Reset */
+	* {
+	    margin: 0;
+	    padding: 0;
+	    box-sizing: border-box;
+	}
+
+	body, html {
+	    height: 100%;
+	    font-family: 'Segoe UI', sans-serif;
+		background-color: #fff;
+	    color: #212121; /* blackish text */
+	}
+
+	.hero {
+	    background: url('/img/hero-bg.jpg') no-repeat center center/cover;
+	    height: 100vh;
+	    color: white;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-between;
+	    position: relative;
+		background-image: url('/image/webdesign.jpg');
+	}
+
+	.navbar {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 30px 50px;
+	    background-color: transparent /* light navbar */
+	}
+
+	.logo {
+	    font-size: 26px;
+	    font-weight: bold;
+	    color: #007bff; /* blue logo */
+	}
+
+	.nav-links {
+	    list-style: none;
+	    display: flex;
+	    gap: 30px;
+	}
+
+	.nav-links li a {
+	    text-decoration: none;
+	    color: rgb(255, 255, 255);
+	    font-weight: 500;
+	    font-size: 14px;
+	    transition: color 0.3s;
+	}
+
+	.nav-links li a:hover {
+	    color: #007bff; /* hover blue */
+	}
+
+	.hero-content {
+	    text-align: center;
+	    margin: auto;
+	    max-width: 700px;
+	    padding: 0 20px;
+	    text-shadow: 1px 1px 5px rgba(0,0,0,0.6); /* white text readable */
+	}
+
+	.hero-content h1 {
+	    font-size: 48px;
+	    font-weight: 700;
+	    margin-bottom: 20px;
+	}
+
+	.hero-content p {
+	    font-size: 16px;
+	    line-height: 1.6;
+	    margin-bottom: 30px;
+	}
+
+	.btn {
+	    padding: 12px 30px;
+	    background-color: #007bff;
+	    color: white;
+	    text-decoration: none;
+	    border-radius: 25px;
+	    font-weight: bold;
+	    transition: background-color 0.3s ease;
+	}
+
+	.btn:hover {
+	    background-color: #0056b3;
+	}
+	
+	
+	.about-section {
+	    padding: 60px;
+		background-color: #fff;
+	}
+
+	.container {
+	    display: flex;
+	    justify-content: center;
+	    align-items: flex-start;
+	    gap: 60px;
+	    flex-wrap: wrap;
+	}
+
+	.about-left img {
+	    width: 300px;
+	    border-radius: 140px;
+		background-color: white;
+	    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	}
+
+	.about-right {
+	    max-width: 600px;
+	}
+
+	.about-right h2 {
+	    color: #212121;
+	    font-size: 28px;
+	}
+
+	.about-right h2 span {
+	    color: #007bff; /* blue name */
+	}
+
+	.about-right h3 {
+	    color: #555; /* gray subtitle */
+	    font-size: 20px;
+	    margin-top: 10px;
+	}
+
+	.about-right p {
+	    font-size: 16px;
+	    line-height: 1.6;
+	    margin: 15px 0;
+		color: #212121;
+	}
+
+	.info-grid {
+	    display: grid;
+	    grid-template-columns: 1fr 1fr;
+	    gap: 10px 30px;
+	    margin: 20px 0;
+	}
+
+	.info-grid p {
+	    margin: 0;
+	    font-size: 15px;
+		color: #555;
+	}
+
+	.download-btn {
+	    background-color: #007bff;
+	    padding: 12px 25px;
+	    border-radius: 25px;
+	    color: #fff;
+	    text-decoration: none;
+	    font-weight: bold;
+	    transition: background 0.3s;
+	}
+
+	.download-btn:hover {
+	    background-color: #0056b3;
+	}
+
+	
+	.services-section {
+	    padding: 60px 0;
+		background-color: #f9f9f9;
+	    text-align: center;
+	}
+
+	.section-title {
+	    font-size: 2.5rem;
+		color: rgb(255, 255, 255);
+		margin-bottom: 40px; 
+	}
+
+	.section-titles{
+		color:black;
+		font-size: 2.5rem;
+		margin-bottom: 40px; 
+		
+	}
+	.section-subtitle {
+		color: #555;
+	    margin-bottom: 40px;
+		
+	}
+
+	.services {
+	    display: flex;
+	    justify-content: center;
+	    gap: 30px;
+	    flex-wrap: wrap;
+	}
+
+	.service-box {
+		background: linear-gradient(135deg, rgb(128, 128, 128), rgb(0, 128, 255)); 
+	    border: 1px solid #ddd;
+	    padding: 30px;
+	    width: 250px;
+	    border-radius: 10px;
+	    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	    transition: transform 0.3s;
+	}
+
+	.service-box:hover {
+	    transform: translateY(-10px);
+	}
+
+	.service-box .icon {
+	    font-size: 40px;
+	    margin-bottom: 20px;
+	    color: #007bff; /* blue icons */
+	}
+
+	.service-box h3 {
+		color: #ffffff;
+	    margin-bottom: 15px;
+	}
+
+	.service-box p {
+	    font-size: 1rem;
+		color: #ffffff;
+	}
+	
+	html {
+	  scroll-behavior: smooth;
+	}
+	
+	
+	.contact-section {
+	    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+	                url("image/shapeline.jpg.jpg") center/cover no-repeat;
+	    padding: 60px 10%;
+	  }
+
+	  .contact-container {
+	    display: flex;
+	    justify-content: space-between;
+	    flex-wrap: wrap;
+	    gap: 40px;
+	  }
+
+	  .contact-info {
+	    flex: 1;
+	    min-width: 250px;
+	  }
+
+	  .contact-info h2 {
+		color:#007bff;
+		
+	    margin-bottom: 20px;
+	  }
+
+	  .contact-info p {
+	    margin: 8px 0;
+		color:white;
+	  }
+
+	  .contact-info i {
+	    margin-right: 10px;
+	    color: #ff004f;
+	  }
+
+	  .contact-form {
+	    flex: 1.2;
+	    min-width: 280px;
+	  }
+
+	  .contact-form input, 
+	  .contact-form textarea {
+	    width: 100%;
+	    padding: 12px;
+	    margin: 10px 0;
+	    border: none;
+	    border-radius: 6px;
+	    background: rgba(255,255,255,0.1);
+	    color: #fff;
+	    outline: none;
+	  }
+
+	  .contact-form input::placeholder,
+	  .contact-form textarea::placeholder {
+	    color: #bbb;
+	  }
+
+	  .contact-form button {
+	    background: #007bff;
+	    color: #fff;
+	    padding: 12px 25px;
+	    border: none;
+	    border-radius: 6px;
+	    cursor: pointer;
+	    font-weight: bold;
+	    transition: 0.3s;
+	  }
+
+	  .contact-form button:hover {
+	    background: #e60045;
+	  }
+
+	  /* Footer */
+	  .footer {
+	    background: #0a0a0a;
+	    text-align: center;
+	    padding: 20px;
+	  
+	    font-size: 14px;
+	    color: #bbb;
+	  }
+
+	  .footer a {
+	    color: #007bff;
+	    text-decoration: none;
+	  }
+	  
+
+
+	
+	  /* Section styling */
+	  .project-section {
+	    text-align: center;
+	    margin: 60px auto;
+	    max-width: 1000px;
+	    padding: 0 20px;
+	  }
+
+	  .section-heading {
+	    font-size: 32px;
+	    font-weight: 700;
+	    margin-bottom: 40px;
+	    color: #1e293b; /* Dark gray-blue */
+	  }
+
+	  /* Card styling */
+	  .project-card {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    background: #ffffff;
+	    border-radius: 16px;
+	    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+	    overflow: hidden;
+	    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	  }
+
+	  .project-card:hover {
+	    transform: translateY(-8px);
+	    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	  }
+
+	  /* Image */
+	  .project-image img {
+	    width: 300px;
+	    height: 100%;
+	    object-fit: cover;
+	    border-radius: 16px 0 0 16px;
+	  }
+
+	  /* Content */
+	  .project-content {
+	    flex: 1;
+	    padding: 30px;
+	    text-align: left;
+	  }
+
+	  .project-subtitle {
+	    font-size: 14px;
+	    color: #64748b; /* gray-blue */
+	    text-transform: uppercase;
+	    letter-spacing: 1px;
+	    margin-bottom: 8px;
+	  }
+
+	  .project-title {
+	    font-size: 24px;
+	    font-weight: bold;
+	    margin-bottom: 15px;
+	    color: #0f172a; /* deep gray */
+	  }
+
+	  .project-description {
+	    font-size: 16px;
+	    line-height: 1.6;
+	    color: #334155;
+	    margin-bottom: 20px;
+	  }
+
+	  /* Button */
+	  .project-btn {
+	    display: inline-block;
+	    padding: 10px 20px;
+	    background: #3b82f6;
+	    color: #fff;
+	    border-radius: 8px;
+	    text-decoration: none;
+	    font-weight: 500;
+	    transition: background 0.3s ease;
+	  }
+
+	  .project-btn:hover {
+	    background: #2563eb;
+	  }
+
+	  /* Responsive */
+	  @media (max-width: 768px) {
+	    .project-card {
+	      flex-direction: column;
+	      text-align: center;
+	    }
+
+	    .project-image img {
+	      width: 100%;
+	      border-radius: 16px 16px 0 0;
+	    }
+
+	    .project-content {
+	      padding: 20px;
+	      text-align: center;
+	    }
+		
+		
+		
+		/* Section styling */
+		.project-section {
+		  text-align: center;
+		  margin: 60px auto;
+		  max-width: 1100px;
+		  padding: 0 20px;
+		  font-family: 'Poppins', sans-serif;
+		}
+
+		.section-heading {
+		  font-size: 36px;
+		  font-weight: 700;
+		  margin-bottom: 50px;
+		  background: linear-gradient(90deg, #3b82f6, #9333ea);
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		  letter-spacing: 2px;
+		}
+
+		/* Card */
+		.project-card {
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  background: rgba(255, 255, 255, 0.1);
+		  border-radius: 20px;
+		  overflow: hidden;
+		  padding: 25px;
+		  backdrop-filter: blur(12px);
+		  border: 1px solid rgba(255, 255, 255, 0.2);
+		  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		  transition: transform 0.4s ease, box-shadow 0.4s ease;
+		}
+
+		.project-card:hover {
+		  transform: translateY(-12px) scale(1.02);
+		  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+		}
+
+		/* Image */
+		.project-image img {
+		  width: 300px;
+		  height: 100%;
+		  object-fit: cover;
+		  border-radius: 16px;
+		  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+		  transition: transform 0.4s ease;
+		}
+
+		.project-card:hover .project-image img {
+		  transform: scale(1.05);
+		}
+
+		/* Content */
+		.project-content {
+		  flex: 1;
+		  padding: 30px;
+		  text-align: left;
+		}
+
+		
+
+		.project-title {
+		  font-size: 28px;
+		  font-weight: 700;
+		
+		  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+		 
+		  -webkit-text-fill-color: transparent;
+		}
+
+		.project-description {
+		  font-size: 16px;
+		  line-height: 1.8;
+		  color: #334155;
+		  margin-bottom: 25px;
+		}
+
+		/* Button */
+		.project-btn {
+		  display: inline-block;
+		  padding: 12px 24px;
+		  background: linear-gradient(90deg, #3b82f6, #9333ea);
+		  color: #fff;
+		  border-radius: 50px;
+		  text-decoration: none;
+		  font-weight: 600;
+		  letter-spacing: 1px;
+		  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+		  transition: all 0.3s ease;
+		}
+
+		.project-btn:hover {
+		  background: linear-gradient(90deg, #9333ea, #3b82f6);
+		  transform: translateY(-3px);
+		  box-shadow: 0 10px 20px rgba(147, 51, 234, 0.5);
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+		  .project-card {
+		    flex-direction: column;
+		    text-align: center;
+		  }
+
+		  .project-image img {
+		    width: 100%;
+		    border-radius: 16px;
+		  }
+
+		  .project-content {
+		    padding: 20px;
+		    text-align: center;
+		  }
+		}
+
+		
+		
+	  }
+
+	 
+
+   
+	  
+	
+
+</style>
+
+<body>
+	<header class="hero" id="home">
+	    <nav class="navbar">
+	        <div class="logo">SUHAIL</div>
+	        <ul class="nav-links">
+	            <li><a href="#home">HOME</a></li>
+	            <li><a href="#about">ABOUT</a></li>
+	            <li><a href="#services">SERVICES</a></li>
+	            <li><a href="#contact">CONTACT</a></li>
+	        </ul>
+	    </nav>
+	    <div class="hero-content">
+	        <h1>SIMPLE IS AWESOME!</h1>
+	        <p>Proficient in HTML, CSS, and JavaScript for building responsive and interactive user interfaces..</p>
+	        <a href="#about" class="btn">LEARN MORE</a>
+	    </div>
+	</header>
+
+	<!-- ABOUT SECTION -->
+	<section class="about-section" id="about">
+	    <div class="container">
+	        <div class="about-left">
+	            <img src="/image/suhail (2).jpg" alt="Profile Picture">
+	        </div>
+	        <div class="about-right">
+	            <h2>Hi There! I'm <span>H.SYNUL SOHAIL</span></h2>
+	            <h3>WEB Designer</h3>
+	            <p>
+	                I am a WEB designer with a strong focus on digital branding.
+	            </p>
+
+	            <div class="info-grid">
+	                <p><strong>BirthDay:</strong>  NOVEMBER 12, 1998</p>
+	                <p><strong>Phone:</strong>  +91 9629918733</p>
+	                <p><strong>Email:</strong>  synulsuhail@gmail.com</p>
+	                <p><strong>From:</strong>  Manavalakurichi, Tamil Nadu</p>
+	                <p><strong>Language:</strong>  English, Tamil, Malayalam</p>
+	            </div>
+
+				<a href="/cv/synul suhail -cv.pdf" download class="btn btn-primary">
+				    Download CV
+				</a>
+
+	        </div>
+	    </div>
+	</section>
+
+	<!-- SERVICES SECTION -->
+	<section class="services-section" id="services">
+	    <h2 class="section-titles">Our Services</h2>
+	    <div class="container">
+	        <div class="services">
+	            <div class="service-box">
+	                <div class="icon">&#128142;</div>
+	                <h3>Development</h3>
+	                <p>Implement proper meta tags, headings, and keyword optimization.</p>
+	            </div>
+	            <div class="service-box">
+	                <div class="icon">&#128154;</div>
+	                <h3>Design</h3>
+	                <p>Maintain a uniform color scheme, fonts, and style across all pages.</p>
+	            </div>
+	            <div class="service-box">
+	                <div class="icon">&#127759;</div>
+	                <h3>SEO</h3>
+	                <p>Find and use the words your audience searches for.</p>
+	            </div>
+	        </div>
+	    </div>
+	</section>
+	
+	
+	
+	
+	<section class="project-section">
+	  <h2 class="section-heading">✨ My Projects ✨</h2>
+
+	  <div class="project-card">
+	    <div class="project-image">
+	      <img src="image/cozastore-template-.jpg" alt="Project Image">
+	    </div>
+	    <div class="project-content">
+	    
+	      <h2 class="project-title">PROJECT DETAILS</h2>
+		  <p class="project-description">
+		    A full-featured eCommerce platform built with Spring Boot and Thymeleaf. 
+		    It includes product catalog, shopping cart, secure checkout, payment integration, 
+		    order management, and an admin dashboard for managing users, orders, and products.
+		  </p>
+
+	     
+	    </div>
+	  </div>
+	</section>
+
+
+
+	
+	
+
+	<!-- CONTACT SECTION -->
+	 <section class="contact-section">
+	    <div class="contact-container">
+	      
+	      <!-- Contact Info -->
+	      <div class="contact-info">
+	        <h2>Get in touch</h2>
+	        <p><i>📞</i> Phone: 9629918733</p>
+	        <p><i>📧</i> Email: synulsuhail@gmail.com</p>
+	      
+	      </div>
+
+	      <!-- Contact Form -->
+		  <div class="contact-form">
+		      <form action="/contact" method="post">
+		          <input type="text" name="name" placeholder="Name" required>
+		          <input type="email" name="email" placeholder="E-mail" required>
+		          <textarea rows="5" name="message" placeholder="Message"></textarea>
+		          <button type="submit">SEND</button>
+		      </form>
+		  </div>
+
+
+	    </div>
+	  </section>
+
+	  <!-- Footer -->
+	  <footer class="footer">
+	    <p>© 2025 Suhail. All Rights Reserved. | Designed by <a href="#">SYNULSUHAIL</a></p>
+	  </footer>
+
+	</body>
+	</html>
+
+</body>
+</html>
+
+
+ 
